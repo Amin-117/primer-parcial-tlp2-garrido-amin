@@ -19,7 +19,31 @@ const UserSchema = new Schema(
       default: "secretary",
     },
     deletedAt: { type: Date, default: null },
-    // ! FALTA COMPLETAR ACA
+    profile: {
+      employee_number: {
+        type: String,
+        unique: true,
+        required: true,
+      },
+      first_name: {
+        type: String,
+        unique: true,
+        required: true,
+        minlength: 2,
+        maxlength: 50,
+      },
+      last_name: {
+        type: String,
+        unique: true,
+        required: true,
+        minlength: 2,
+        maxlength: 50,
+      },
+      phone: {
+        type: String,
+        required: false,
+      },
+    },
   },
   { timestamps: true }
 );

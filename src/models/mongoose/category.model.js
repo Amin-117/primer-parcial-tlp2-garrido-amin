@@ -12,6 +12,10 @@ const CategorySchema = new Schema(
       maxlength: 100,
     },
     description: { type: String, maxlength: 500 },
+    assets: {
+      type: Schema.Types.ObjectId,
+      ref: "Assets",
+    },
   },
   { timestamps: true }
 );

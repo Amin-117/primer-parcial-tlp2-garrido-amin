@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 // TODO: completar relaciones embebidas y referenciadas
 
@@ -23,6 +23,10 @@ const AssetSchema = new Schema(
     responsible: {
       type: Schema.Types.ObjectId,
       ref: "User",
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "Category",
     },
   },
   { timestamps: true }

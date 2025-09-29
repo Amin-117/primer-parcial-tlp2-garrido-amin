@@ -1,6 +1,12 @@
+import { UserModel } from "../models/mongoose/user.model";
+
 export const getAllUsers = async (_req, res) => {
   try {
     // TODO: devolver usuarios con profile y sus assets con sus categories (populate) (solo admin)
+    const users = await UserModel.find({ deletedAt: null }).populate(
+      "Assets",
+      "Category"
+    );
     return res.status(200).json({ data: users });
   } catch (error) {
     console.log(error);
@@ -9,8 +15,16 @@ export const getAllUsers = async (_req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
+  const { id } = req.params;
   try {
     // TODO: eliminación lógica (deletedAt) (solo admin)
+
+    const deletedUser = await UserModel.findOneAndUpdate(
+      { _id: id, deletedAt: null },
+      { deletedAt: new Date() },
+      { new: true }
+    );
+
     return res.status(204).json({ msg: "Usuario eliminado correctamente" });
   } catch (error) {
     console.log(error);

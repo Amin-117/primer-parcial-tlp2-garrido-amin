@@ -1,4 +1,5 @@
 import { DataTypes } from "sequelize";
+import { UserModel } from "./user.model";
 
 export const AssetModel = sequelize.define("Asset", {
   inventory_number: {

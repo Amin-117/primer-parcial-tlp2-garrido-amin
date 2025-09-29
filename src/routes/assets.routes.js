@@ -7,8 +7,13 @@ import {
 } from "../controllers/assets.controller.js";
 import { createAssetValidation } from "../middlewares/validations/asset.validations.js";
 import { validator } from "../middlewares/validator.middleware.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
+import { adminMiddleware } from "../middlewares/admin.middleware.js";
+import { responsibleMiddleware } from "../middlewares/responsible.middleware.js";
 
 export const assetRoutes = Router();
+
+assetRoutes.use(authMiddleware);
 
 // TODO: proteger las rutas con middlewares de autenticación y autorización faltantes
 
@@ -16,10 +21,20 @@ export const assetRoutes = Router();
 assetRoutes.post("/assets", createAssetValidation, validator, createAsset);
 
 // * traer todos los recursos (usuario autenticado que sea admin)
-assetRoutes.get("/assets", getAllAssets);
+assetRoutes.get("/assets", adminMiddleware, validator, getAllAssets);
 
 // * traer mis recursos (usuario autenticado que sea responsible)
-assetRoutes.get("/assets/my-assets", getMyAssets);
+assetRoutes.get(
+  "/assets/my-assets",
+  responsibleMiddleware,
+  validator,
+  getMyAssets
+);
 
 // * eliminar un recurso por id (usuario autenticado que sea responsible)
-assetRoutes.delete("/assets/:id", deleteAsset);
+assetRoutes.delete(
+  "/assets/:id",
+  responsibleMiddleware,
+  validator,
+  deleteAsset
+);

@@ -53,5 +53,10 @@ const UserSchema = new Schema(
 );
 
 // ! FALTA COMPLETAR ACA
+// UserSchema.virtual("", {
+//   ref: "Alumno",
+//   localField: "_id",
+//   foreignField: "cursos",
+// });
 
 export const UserModel = model("User", UserSchema);

@@ -32,5 +32,4 @@ UserModel.hasMany(AssetModel, {
 AssetModel.belongsTo(UserModel, {
   foreignKey: "user_id",
   as: "responsible",
-  onDelete: "CASCADE",
 });

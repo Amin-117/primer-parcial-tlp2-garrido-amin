@@ -44,6 +44,10 @@ const UserSchema = new Schema(
         required: false,
       },
     },
+    assets: {
+      type: Schema.Types.ObjectId,
+      ref: "Assets",
+    },
   },
   { timestamps: true }
 );
